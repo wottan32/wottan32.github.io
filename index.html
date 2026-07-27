@@ -11,10 +11,13 @@
   <meta property="og:title" content="Mario Torres — Senior Python Backend Developer">
   <meta property="og:description" content="Senior Python backend engineer focused on automation, data pipelines and reliable backend services. Remote-ready (US/EU time zones), EU passport holder.">
   <meta property="og:type" content="website">
+  <meta property="og:url" content="https://wottan32.github.io/">
   <meta property="og:locale" content="en_US">
+  <meta property="og:locale:alternate" content="es_CL">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Mario Torres — Senior Python Backend Developer">
   <meta name="twitter:description" content="Senior Python backend engineer focused on automation, data pipelines and reliable backend services.">
+  <link rel="canonical" href="https://wottan32.github.io/">
 
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%E2%8C%A8%EF%B8%8F%3C/text%3E%3C/svg%3E">
 
@@ -27,7 +30,7 @@
     :root {
       --font-sans: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
       --font-mono: "JetBrains Mono", ui-monospace, "Cascadia Code", Consolas, monospace;
-      --max-w: 46rem;
+      --max-w: 52rem;
     }
     [data-theme="dark"] {
       --bg: #0d1117;
@@ -40,6 +43,7 @@
       --link: #6cb6ff;
       --terminal-bg: #010409;
       --badge-bg: #1c2430;
+      --card-hover: #1b222c;
       color-scheme: dark;
     }
     [data-theme="light"] {
@@ -53,6 +57,7 @@
       --link: #0b5cad;
       --terminal-bg: #0d1117;
       --badge-bg: #eef1f4;
+      --card-hover: #eef1f4;
       color-scheme: light;
     }
 
@@ -94,22 +99,23 @@
       gap: 1rem; padding: .7rem 1.25rem;
       max-width: var(--max-w); margin: 0 auto;
     }
-    .nav-brand { font-family: var(--font-mono); font-weight: 600; font-size: .95rem; color: var(--text); }
+    .nav-brand { font-family: var(--font-mono); font-weight: 600; font-size: .95rem; color: var(--text); white-space: nowrap; }
     .nav-brand span { color: var(--accent); }
-    .nav-links { display: none; gap: 1.1rem; list-style: none; }
-    .nav-links a { color: var(--text-dim); font-size: .9rem; }
+    .nav-links { display: none; gap: 1rem; list-style: none; }
+    .nav-links a { color: var(--text-dim); font-size: .88rem; }
     .nav-links a:hover { color: var(--text); }
-    @media (min-width: 640px) { .nav-links { display: flex; } }
+    @media (min-width: 720px) { .nav-links { display: flex; } }
+    .nav-controls { display: flex; gap: .5rem; align-items: center; }
 
-    #theme-toggle {
+    .ctrl-btn {
       background: none; border: 1px solid var(--border); color: var(--text);
       border-radius: 6px; padding: .35rem .55rem; cursor: pointer;
-      font-size: 1rem; line-height: 1;
+      font-size: .9rem; line-height: 1; font-family: var(--font-mono);
     }
-    #theme-toggle:hover { border-color: var(--accent); }
+    .ctrl-btn:hover { border-color: var(--accent); }
 
     /* ---------- Hero ---------- */
-    .hero { padding: 4.5rem 0 3.5rem; }
+    .hero { padding: 4rem 0 3.2rem; }
     .hero h1 { font-size: clamp(1.9rem, 6vw, 2.8rem); font-weight: 700; letter-spacing: -0.02em; }
     .hero .role {
       font-family: var(--font-mono); color: var(--accent);
@@ -166,6 +172,7 @@
       margin-bottom: 1.5rem; letter-spacing: -0.01em;
     }
     h2::before { content: "## "; color: var(--accent); }
+    .section-note { color: var(--text-dim); font-size: .9rem; margin: -1rem 0 1.5rem; }
 
     .about p + p { margin-top: .9rem; }
     .about .facts {
@@ -176,15 +183,34 @@
     @media (min-width: 560px) { .about .facts { grid-template-columns: 1fr 1fr; } }
     .about .facts li::before { content: "▸ "; color: var(--accent); font-family: var(--font-mono); }
 
+    /* ---------- Projects ---------- */
+    .cards { display: grid; gap: 1rem; grid-template-columns: 1fr; list-style: none; }
+    @media (min-width: 640px) { .cards { grid-template-columns: 1fr 1fr; } }
+    .card {
+      border: 1px solid var(--border); border-radius: 8px;
+      padding: 1.1rem 1.2rem; background: var(--bg-alt);
+      display: flex; flex-direction: column; gap: .55rem;
+      transition: border-color .15s ease, background .15s ease;
+    }
+    .card:hover { border-color: var(--accent); background: var(--card-hover); }
+    .card-tag {
+      font-family: var(--font-mono); font-size: .68rem; text-transform: uppercase;
+      letter-spacing: .07em; color: var(--text-dim);
+    }
+    .card h3 { font-size: 1rem; font-weight: 600; line-height: 1.35; }
+    .card p { font-size: .9rem; color: var(--text-dim); flex: 1; }
+    .card .stack { font-family: var(--font-mono); font-size: .74rem; color: var(--accent); }
+    .card .card-link { font-size: .85rem; font-family: var(--font-mono); }
+
     /* ---------- Timeline ---------- */
     .timeline { list-style: none; position: relative; padding-left: 1.4rem; }
     .timeline::before {
       content: ""; position: absolute; left: .28rem; top: .4rem; bottom: .4rem;
       width: 2px; background: var(--border);
     }
-    .timeline li { position: relative; padding-bottom: 2rem; }
-    .timeline li:last-child { padding-bottom: 0; }
-    .timeline li::before {
+    .timeline > li { position: relative; padding-bottom: 2rem; }
+    .timeline > li:last-child { padding-bottom: 0; }
+    .timeline > li::before {
       content: ""; position: absolute; left: -1.4rem; top: .42rem;
       width: .62rem; height: .62rem; border-radius: 50%;
       background: var(--accent); border: 2px solid var(--bg);
@@ -194,13 +220,8 @@
     .tl-org { color: var(--text-dim); font-size: .95rem; }
     .tl-date { font-family: var(--font-mono); font-size: .78rem; color: var(--text-dim); margin-top: .15rem; }
     .timeline ul { list-style: none; margin-top: .6rem; }
-    .timeline ul li { padding: 0 0 .45rem 1rem; }
-    .timeline ul li::before {
-      content: "–"; position: absolute; left: 0; top: 0;
-      width: auto; height: auto; border: 0; border-radius: 0;
-      background: none; color: var(--accent); font-family: var(--font-mono);
-    }
-    .timeline ul li { position: relative; font-size: .95rem; color: var(--text); }
+    .timeline ul li { position: relative; padding: 0 0 .45rem 1rem; font-size: .95rem; }
+    .timeline ul li::before { content: "–"; position: absolute; left: 0; top: 0; color: var(--accent); font-family: var(--font-mono); }
     .tech { font-family: var(--font-mono); font-size: .86em; color: var(--accent); }
 
     /* ---------- Skills ---------- */
@@ -222,8 +243,50 @@
     .edu-list h3 { font-size: .98rem; font-weight: 600; }
     .edu-list p { color: var(--text-dim); font-size: .92rem; }
 
+    /* ---------- Chatbot ---------- */
+    .chat-shell {
+      border: 1px solid var(--border); border-radius: 8px; overflow: hidden;
+      background: var(--terminal-bg); font-family: var(--font-mono);
+    }
+    .chat-log {
+      padding: 1rem .95rem; height: 21rem; overflow-y: auto;
+      font-size: .84rem; color: #e6edf3; scroll-behavior: smooth;
+    }
+    .chat-msg { margin-bottom: .85rem; white-space: pre-wrap; word-wrap: break-word; }
+    .chat-msg .who { color: #4cc38a; font-weight: 600; }
+    .chat-msg.user .who { color: #6cb6ff; }
+    .chat-msg .txt { color: #c9d1d9; }
+    .chat-msg a { color: #6cb6ff; }
+    .chat-suggestions {
+      display: flex; flex-wrap: wrap; gap: .45rem;
+      padding: .7rem .95rem; border-top: 1px solid #21262d;
+    }
+    .chip {
+      font-family: var(--font-mono); font-size: .72rem;
+      background: #161b22; color: #9ba7b4; border: 1px solid #2d333b;
+      border-radius: 999px; padding: .3rem .7rem; cursor: pointer;
+    }
+    .chip:hover, .chip:focus-visible { border-color: #4cc38a; color: #e6edf3; }
+    .chat-form {
+      display: flex; gap: .5rem; padding: .7rem .95rem;
+      border-top: 1px solid #21262d; background: #0d1117;
+    }
+    .chat-form input {
+      flex: 1; background: #010409; border: 1px solid #2d333b; border-radius: 6px;
+      color: #e6edf3; font-family: var(--font-mono); font-size: .84rem;
+      padding: .55rem .7rem; min-width: 0;
+    }
+    .chat-form input::placeholder { color: #656e78; }
+    .chat-form input:focus-visible { outline: 2px solid #4cc38a; outline-offset: 1px; }
+    .chat-form button {
+      background: #4cc38a; color: #0d1117; border: 0; border-radius: 6px;
+      font-family: var(--font-mono); font-weight: 600; font-size: .84rem;
+      padding: .55rem 1rem; cursor: pointer;
+    }
+    .chat-form button:hover { filter: brightness(1.1); }
+
     /* ---------- Contact ---------- */
-    .contact p { max-width: 38rem; }
+    .contact p { max-width: 40rem; }
     .contact .cta-row { margin-top: 1.5rem; }
 
     footer.site {
@@ -234,19 +297,23 @@
   </style>
 </head>
 <body>
-  <a class="skip-link" href="#main">Skip to content</a>
+  <a class="skip-link" href="#main" data-i18n="skip">Skip to content</a>
 
   <header class="site">
     <nav class="nav" aria-label="Main navigation">
       <a class="nav-brand" href="#top" aria-label="Home">mario<span>@</span>torres<span>:~$</span></a>
       <ul class="nav-links">
-        <li><a href="#about">About</a></li>
-        <li><a href="#experience">Experience</a></li>
-        <li><a href="#skills">Skills</a></li>
-        <li><a href="#education">Education</a></li>
-        <li><a href="#contact">Contact</a></li>
+        <li><a href="#about" data-i18n="nav_about">About</a></li>
+        <li><a href="#projects" data-i18n="nav_projects">Projects</a></li>
+        <li><a href="#experience" data-i18n="nav_experience">Experience</a></li>
+        <li><a href="#skills" data-i18n="nav_skills">Skills</a></li>
+        <li><a href="#assistant" data-i18n="nav_assistant">Assistant</a></li>
+        <li><a href="#contact" data-i18n="nav_contact">Contact</a></li>
       </ul>
-      <button id="theme-toggle" aria-label="Switch to light theme" title="Toggle color theme">🌙</button>
+      <div class="nav-controls">
+        <button id="lang-toggle" class="ctrl-btn" aria-label="Cambiar idioma a español">ES</button>
+        <button id="theme-toggle" class="ctrl-btn" aria-label="Switch to light theme">🌙</button>
+      </div>
     </nav>
   </header>
 
@@ -254,11 +321,11 @@
     <!-- ================= HERO ================= -->
     <section class="hero wrap" id="top" style="border-top:0">
       <h1>Mario Torres Lagos</h1>
-      <p class="role">Senior Backend Developer · Python</p>
+      <p class="role" data-i18n="role">Senior Backend Developer · Python</p>
       <p class="meta">
         Santiago, Chile <span class="sep">·</span>
-        Remote-ready (US/EU time zones) <span class="sep">·</span>
-        EU passport holder
+        <span data-i18n="meta_remote">Remote-ready (US/EU time zones)</span> <span class="sep">·</span>
+        <span data-i18n="meta_passport">EU passport holder</span>
       </p>
 
       <div class="terminal" aria-hidden="true">
@@ -266,86 +333,111 @@
         <div class="terminal-body">
           <span class="prompt">$&nbsp;</span><span id="typed"></span><span class="cursor" id="cursor"></span>
           <span class="out" id="term-out" hidden>
-            <strong>✓</strong> 6 years of backend experience loaded<br>
-            <strong>✓</strong> status: <strong>available</strong> — open to remote roles
+            <strong>✓</strong> <span data-i18n="term_line1">6 years of backend experience loaded</span><br>
+            <strong>✓</strong> <span data-i18n="term_line2">status: available — open to remote roles</span>
           </span>
         </div>
       </div>
 
       <div class="cta-row">
-        <a class="btn btn-primary" href="mailto:mariotorreslagos@gmail.com">✉ Get in touch</a>
-        <a class="btn" href="./cv/CV_Mario_Torres_Backend_EN_MASTER_v2.pdf" download>⬇ Download CV (PDF)</a>
+        <a class="btn btn-primary" href="mailto:mariotorreslagos@gmail.com" data-i18n="cta_contact">✉ Get in touch</a>
+        <a class="btn" href="./cv/CV_Mario_Torres_Backend_EN_MASTER_v2.pdf" download data-i18n="cta_cv">⬇ Download CV (PDF)</a>
         <a class="btn" href="https://linkedin.com/in/mario-torres-lagos" target="_blank" rel="noopener noreferrer">in/ LinkedIn</a>
       </div>
     </section>
 
     <!-- ================= ABOUT ================= -->
     <section id="about" class="about wrap">
-      <h2>About</h2>
-      <p>
+      <h2 data-i18n="h_about">About</h2>
+      <p data-i18n="about_p1">
         Senior Python backend engineer focused on automation, data pipelines and reliable
         backend services. I turn messy, manual processes into systems that run by themselves —
         from multi-country data pipelines to unattended file-sync services running in production.
       </p>
-      <p>
+      <p data-i18n="about_p2">
         Based in Santiago, Chile, and set up for remote work across US and European time zones.
         Educated in the UK (English C1), native Spanish speaker, EU passport holder.
       </p>
       <ul class="facts">
-        <li>6 years of professional experience</li>
-        <li>Python &amp; C#/.NET backend</li>
-        <li>English C1 (UK-educated) · Spanish native</li>
-        <li>EU passport — no sponsorship needed in the EU</li>
+        <li data-i18n="fact_1">6 years of professional experience</li>
+        <li data-i18n="fact_2">Python &amp; C#/.NET backend</li>
+        <li data-i18n="fact_3">English C1 (UK-educated) · Spanish native</li>
+        <li data-i18n="fact_4">EU passport — no sponsorship needed in the EU</li>
+      </ul>
+    </section>
+
+    <!-- ================= PROJECTS ================= -->
+    <section id="projects" class="wrap">
+      <h2 data-i18n="h_projects">Selected Projects</h2>
+      <p class="section-note" data-i18n="projects_note">
+        Work built for employers runs in production and is proprietary — described here without source links.
+      </p>
+      <ul class="cards">
+        <li class="card">
+          <span class="card-tag" data-i18n="tag_prod">Production · Proprietary</span>
+          <h3 data-i18n="prj1_t">Multi-country survey data CLI</h3>
+          <p data-i18n="prj1_d">Python CLI (Typer) processing survey data across 5 LATAM markets — 43M+ records. SQL Server + API integration, parallel downloads (ThreadPoolExecutor), parquet caching, Excel reporting. Scheduled for unattended execution.</p>
+          <span class="stack">Python · Typer · SQL Server · parquet</span>
+        </li>
+        <li class="card">
+          <span class="card-tag" data-i18n="tag_prod">Production · Proprietary</span>
+          <h3 data-i18n="prj2_t">SharePoint sync worker service</h3>
+          <p data-i18n="prj2_d">.NET 8 Worker Service automating file/photo sync between local directories and SharePoint Online across 8 LATAM countries — built and fully owned end-to-end, replacing manual processes.</p>
+          <span class="stack">.NET 8 · Microsoft Graph API · Docker</span>
+        </li>
+        <li class="card">
+          <span class="card-tag" data-i18n="tag_prod">Production · Contribution</span>
+          <h3 data-i18n="prj3_t">OCR pipeline improvements</h3>
+          <p data-i18n="prj3_d">Contributed to a production OCR pipeline (TF-IDF + RapidFuzz, human-in-the-loop): identified a recall bottleneck and proposed reframing the tool as analyst assistance.</p>
+          <span class="stack">Python · TF-IDF · RapidFuzz</span>
+        </li>
+        <li class="card">
+          <span class="card-tag" data-i18n="tag_lab">Personal lab</span>
+          <h3 data-i18n="prj4_t">AI experimentation lab</h3>
+          <p data-i18n="prj4_d">Ongoing hands-on work with multi-agent systems, RAG pipelines, local LLMs and vector stores (ChromaDB). The assistant on this page is a small, fully client-side example.</p>
+          <span class="stack">multi-agent · RAG · local LLMs · ChromaDB</span>
+        </li>
+        <li class="card">
+          <span class="card-tag" data-i18n="tag_oss">Open source</span>
+          <h3 data-i18n="prj5_t">Evil Crow RF V2 recovery guide</h3>
+          <p data-i18n="prj5_d">Recovery guide for bricked Evil Crow RF V2 boards (ESP32-PICO-D4): bootloader recovery, working firmware combinations and a diagnosis flowchart.</p>
+          <span class="stack">ESP32 · esptool · Shell</span>
+          <a class="card-link" href="https://github.com/wottan32/evilcrow-pico-d4-fix" target="_blank" rel="noopener noreferrer">github.com/wottan32 →</a>
+        </li>
+        <li class="card">
+          <span class="card-tag" data-i18n="tag_venture">Venture</span>
+          <h3 data-i18n="prj6_t">Enlig10 — web development venture</h3>
+          <p data-i18n="prj6_d">Founded a web development venture, handling the full project lifecycle directly with clients — scoping, build, delivery and support.</p>
+          <span class="stack">full project lifecycle</span>
+        </li>
       </ul>
     </section>
 
     <!-- ================= EXPERIENCE ================= -->
     <section id="experience" class="wrap">
-      <h2>Experience</h2>
+      <h2 data-i18n="h_experience">Experience</h2>
       <ol class="timeline">
         <li>
           <div class="tl-head">
-            <h3>Software Developer</h3>
+            <h3 data-i18n="exp1_role">Software Developer</h3>
             <span class="tl-org">— Kantar Worldpanel LATAM</span>
           </div>
           <p class="tl-date">Mar 2025 – May 2026</p>
           <ul>
-            <li>
-              Designed and built a Python CLI (<span class="tech">Typer</span>) for multi-country
-              survey data processing across 5 LATAM markets (43M+ records):
-              <span class="tech">SQL Server</span> + API integration, parallel downloads via
-              <span class="tech">ThreadPoolExecutor</span>, <span class="tech">parquet</span> caching
-              and Excel reporting. Collaborated on its scheduling for unattended execution.
-            </li>
-            <li>
-              Built and fully owned end-to-end a <span class="tech">.NET 8</span> Worker Service
-              automating file/photo sync between local directories and SharePoint Online
-              (<span class="tech">Microsoft Graph API</span>, <span class="tech">Docker</span>)
-              across 8 LATAM countries, replacing manual processes.
-            </li>
-            <li>
-              Contributed to improvements of a production OCR pipeline
-              (<span class="tech">TF-IDF</span> + <span class="tech">RapidFuzz</span>,
-              human-in-the-loop), identifying a recall bottleneck and proposing reframing
-              the tool as analyst assistance.
-            </li>
+            <li data-i18n="exp1_b1">Designed and built the multi-country survey data CLI described above (5 LATAM markets, 43M+ records), collaborating on its scheduling for unattended execution.</li>
+            <li data-i18n="exp1_b2">Built and fully owned the .NET 8 SharePoint sync Worker Service across 8 LATAM countries, replacing manual processes.</li>
+            <li data-i18n="exp1_b3">Contributed improvements to a production OCR pipeline, identifying a recall bottleneck and proposing reframing the tool as analyst assistance.</li>
           </ul>
         </li>
         <li>
           <div class="tl-head">
-            <h3>Backend Developer &amp; Founder</h3>
-            <span class="tl-org">— SII Group · Enlig10 (earlier roles)</span>
+            <h3 data-i18n="exp2_role">Backend Developer &amp; Founder</h3>
+            <span class="tl-org">— SII Group · Enlig10</span>
           </div>
-          <p class="tl-date">Earlier experience</p>
+          <p class="tl-date" data-i18n="exp2_date">Earlier experience</p>
           <ul>
-            <li>
-              Built backend services in <span class="tech">Python</span> and
-              <span class="tech">.NET</span> for enterprise clients at SII Group.
-            </li>
-            <li>
-              Founded Enlig10, a web development venture — full project lifecycle
-              working directly with clients.
-            </li>
+            <li data-i18n="exp2_b1">Built backend services in Python and .NET for enterprise clients at SII Group.</li>
+            <li data-i18n="exp2_b2">Founded Enlig10, a web development venture — full project lifecycle working directly with clients.</li>
           </ul>
         </li>
       </ol>
@@ -353,10 +445,10 @@
 
     <!-- ================= SKILLS ================= -->
     <section id="skills" class="wrap">
-      <h2>Skills</h2>
+      <h2 data-i18n="h_skills">Skills</h2>
 
       <div class="skill-group">
-        <h3>Languages &amp; Backend</h3>
+        <h3 data-i18n="sg_backend">Languages &amp; Backend</h3>
         <ul class="badges">
           <li>Python</li><li>FastAPI</li><li>Django</li><li>Flask</li><li>Typer</li>
           <li>C# / .NET 8</li><li>SQL</li>
@@ -364,15 +456,15 @@
       </div>
 
       <div class="skill-group">
-        <h3>Data</h3>
+        <h3 data-i18n="sg_data">Data</h3>
         <ul class="badges">
           <li>PostgreSQL</li><li>SQL Server</li><li>MongoDB</li><li>BigQuery</li>
-          <li>pandas</li><li>data pipelines</li>
+          <li>pandas</li><li data-i18n="sk_pipelines">data pipelines</li>
         </ul>
       </div>
 
       <div class="skill-group">
-        <h3>Cloud &amp; DevOps</h3>
+        <h3 data-i18n="sg_cloud">Cloud &amp; DevOps</h3>
         <ul class="badges">
           <li>GCP (Cloud Run, Cloud Functions, BigQuery)</li><li>Docker</li>
           <li>GitHub Actions</li><li>CI/CD</li><li>Linux</li>
@@ -380,9 +472,9 @@
       </div>
 
       <div class="skill-group">
-        <h3>AI (personal lab)</h3>
+        <h3 data-i18n="sg_ai">AI (personal lab)</h3>
         <ul class="badges">
-          <li>multi-agent systems</li><li>RAG</li><li>local LLMs</li>
+          <li data-i18n="sk_agents">multi-agent systems</li><li>RAG</li><li data-i18n="sk_llms">local LLMs</li>
           <li>ChromaDB</li><li>prompt engineering</li>
         </ul>
       </div>
@@ -390,42 +482,59 @@
 
     <!-- ================= EDUCATION ================= -->
     <section id="education" class="wrap">
-      <h2>Education &amp; Certifications</h2>
+      <h2 data-i18n="h_education">Education &amp; Certifications</h2>
       <ul class="edu-list">
         <li>
-          <h3>B.Eng. Computer Engineering</h3>
+          <h3 data-i18n="edu1_t">B.Eng. Computer Engineering</h3>
           <p>DUOC UC — Chile</p>
         </li>
         <li>
           <h3>UK A-Levels</h3>
-          <p>St. Peter's Catholic School — Guildford, UK (basis for C1 English)</p>
+          <p data-i18n="edu2_d">St. Peter's Catholic School — Guildford, UK (basis for C1 English)</p>
         </li>
         <li>
-          <h3>Certifications</h3>
-          <p>
-            Harvard CS50P · Google Cloud (BigQuery ML, Apigee, Compute Engine) ·
-            IBM · Yonsei · Princeton
-          </p>
+          <h3 data-i18n="edu3_t">Certifications</h3>
+          <p>Harvard CS50P · Google Cloud (BigQuery ML, Apigee, Compute Engine) · IBM · Yonsei · Princeton</p>
         </li>
       </ul>
     </section>
 
+    <!-- ================= AI ASSISTANT ================= -->
+    <section id="assistant" class="wrap">
+      <h2 data-i18n="h_assistant">Ask the Assistant</h2>
+      <p class="section-note" data-i18n="assistant_note">
+        A small AI-style assistant that answers questions about my experience — 100% client-side JavaScript,
+        no backend, no external calls. It only knows verified facts from this page.
+      </p>
+      <div class="chat-shell">
+        <div class="chat-log" id="chat-log" role="log" aria-live="polite" aria-label="Assistant conversation"></div>
+        <div class="chat-suggestions" id="chat-chips" aria-label="Suggested questions"></div>
+        <form class="chat-form" id="chat-form">
+          <label for="chat-input" class="skip-link" data-i18n="chat_label">Ask a question</label>
+          <input id="chat-input" type="text" autocomplete="off" maxlength="200"
+                 data-i18n-placeholder="chat_placeholder" placeholder="e.g. what has Mario built?">
+          <button type="submit" data-i18n="chat_send">Send</button>
+        </form>
+      </div>
+    </section>
+
     <!-- ================= CONTACT ================= -->
     <section id="contact" class="contact wrap">
-      <h2>Contact</h2>
-      <p>
+      <h2 data-i18n="h_contact">Contact</h2>
+      <p data-i18n="contact_p">
         Open to senior backend roles — remote, US or EU time zones.
         The fastest way to reach me is email; I usually reply within a day.
       </p>
       <div class="cta-row">
         <a class="btn btn-primary" href="mailto:mariotorreslagos@gmail.com">mariotorreslagos@gmail.com</a>
         <a class="btn" href="https://linkedin.com/in/mario-torres-lagos" target="_blank" rel="noopener noreferrer">linkedin.com/in/mario-torres-lagos</a>
+        <a class="btn" href="https://github.com/wottan32" target="_blank" rel="noopener noreferrer">github.com/wottan32</a>
       </div>
     </section>
   </main>
 
   <footer class="site">
-    <p>© <span id="year">2026</span> Mario Torres Lagos — built with plain HTML/CSS/JS, no frameworks.</p>
+    <p>© <span id="year">2026</span> Mario Torres Lagos — <span data-i18n="footer">built with plain HTML/CSS/JS, no frameworks.</span></p>
   </footer>
 
   <!--
@@ -437,31 +546,181 @@
     (function () {
       "use strict";
 
-      /* ---------- Theme toggle ---------- */
-      var root = document.documentElement;
-      var toggle = document.getElementById("theme-toggle");
-      var stored = null;
-      try { stored = localStorage.getItem("theme"); } catch (e) {}
-      if (stored === "light" || stored === "dark") applyTheme(stored);
+      /* ================= i18n ================= */
+      var I18N = {
+        en: {
+          skip: "Skip to content",
+          nav_about: "About", nav_projects: "Projects", nav_experience: "Experience",
+          nav_skills: "Skills", nav_assistant: "Assistant", nav_contact: "Contact",
+          role: "Senior Backend Developer · Python",
+          meta_remote: "Remote-ready (US/EU time zones)",
+          meta_passport: "EU passport holder",
+          term_line1: "6 years of backend experience loaded",
+          term_line2: "status: available — open to remote roles",
+          cta_contact: "✉ Get in touch", cta_cv: "⬇ Download CV (PDF)",
+          h_about: "About",
+          about_p1: "Senior Python backend engineer focused on automation, data pipelines and reliable backend services. I turn messy, manual processes into systems that run by themselves — from multi-country data pipelines to unattended file-sync services running in production.",
+          about_p2: "Based in Santiago, Chile, and set up for remote work across US and European time zones. Educated in the UK (English C1), native Spanish speaker, EU passport holder.",
+          fact_1: "6 years of professional experience",
+          fact_2: "Python & C#/.NET backend",
+          fact_3: "English C1 (UK-educated) · Spanish native",
+          fact_4: "EU passport — no sponsorship needed in the EU",
+          h_projects: "Selected Projects",
+          projects_note: "Work built for employers runs in production and is proprietary — described here without source links.",
+          tag_prod: "Production · Proprietary", tag_lab: "Personal lab", tag_oss: "Open source", tag_venture: "Venture",
+          prj1_t: "Multi-country survey data CLI",
+          prj1_d: "Python CLI (Typer) processing survey data across 5 LATAM markets — 43M+ records. SQL Server + API integration, parallel downloads (ThreadPoolExecutor), parquet caching, Excel reporting. Scheduled for unattended execution.",
+          prj2_t: "SharePoint sync worker service",
+          prj2_d: ".NET 8 Worker Service automating file/photo sync between local directories and SharePoint Online across 8 LATAM countries — built and fully owned end-to-end, replacing manual processes.",
+          prj3_t: "OCR pipeline improvements",
+          prj3_d: "Contributed to a production OCR pipeline (TF-IDF + RapidFuzz, human-in-the-loop): identified a recall bottleneck and proposed reframing the tool as analyst assistance.",
+          prj4_t: "AI experimentation lab",
+          prj4_d: "Ongoing hands-on work with multi-agent systems, RAG pipelines, local LLMs and vector stores (ChromaDB). The assistant on this page is a small, fully client-side example.",
+          prj5_t: "Evil Crow RF V2 recovery guide",
+          prj5_d: "Recovery guide for bricked Evil Crow RF V2 boards (ESP32-PICO-D4): bootloader recovery, working firmware combinations and a diagnosis flowchart.",
+          prj6_t: "Enlig10 — web development venture",
+          prj6_d: "Founded a web development venture, handling the full project lifecycle directly with clients — scoping, build, delivery and support.",
+          h_experience: "Experience",
+          exp1_role: "Software Developer",
+          exp1_b1: "Designed and built the multi-country survey data CLI described above (5 LATAM markets, 43M+ records), collaborating on its scheduling for unattended execution.",
+          exp1_b2: "Built and fully owned the .NET 8 SharePoint sync Worker Service across 8 LATAM countries, replacing manual processes.",
+          exp1_b3: "Contributed improvements to a production OCR pipeline, identifying a recall bottleneck and proposing reframing the tool as analyst assistance.",
+          exp2_role: "Backend Developer & Founder",
+          exp2_date: "Earlier experience",
+          exp2_b1: "Built backend services in Python and .NET for enterprise clients at SII Group.",
+          exp2_b2: "Founded Enlig10, a web development venture — full project lifecycle working directly with clients.",
+          h_skills: "Skills",
+          sg_backend: "Languages & Backend", sg_data: "Data", sg_cloud: "Cloud & DevOps", sg_ai: "AI (personal lab)",
+          sk_pipelines: "data pipelines", sk_agents: "multi-agent systems", sk_llms: "local LLMs",
+          h_education: "Education & Certifications",
+          edu1_t: "B.Eng. Computer Engineering",
+          edu2_d: "St. Peter's Catholic School — Guildford, UK (basis for C1 English)",
+          edu3_t: "Certifications",
+          h_assistant: "Ask the Assistant",
+          assistant_note: "A small AI-style assistant that answers questions about my experience — 100% client-side JavaScript, no backend, no external calls. It only knows verified facts from this page.",
+          chat_label: "Ask a question",
+          chat_placeholder: "e.g. what has Mario built?",
+          chat_send: "Send",
+          h_contact: "Contact",
+          contact_p: "Open to senior backend roles — remote, US or EU time zones. The fastest way to reach me is email; I usually reply within a day.",
+          footer: "built with plain HTML/CSS/JS, no frameworks.",
+          lang_btn_label: "Cambiar idioma a español",
+          theme_to_light: "Switch to light theme", theme_to_dark: "Switch to dark theme"
+        },
+        es: {
+          skip: "Saltar al contenido",
+          nav_about: "Sobre mí", nav_projects: "Proyectos", nav_experience: "Experiencia",
+          nav_skills: "Skills", nav_assistant: "Asistente", nav_contact: "Contacto",
+          role: "Desarrollador Backend Senior · Python",
+          meta_remote: "Disponible remoto (husos US/EU)",
+          meta_passport: "Pasaporte de la UE",
+          term_line1: "6 años de experiencia backend cargados",
+          term_line2: "estado: disponible — abierto a roles remotos",
+          cta_contact: "✉ Contáctame", cta_cv: "⬇ Descargar CV (PDF)",
+          h_about: "Sobre mí",
+          about_p1: "Ingeniero backend senior en Python, enfocado en automatización, pipelines de datos y servicios backend confiables. Convierto procesos manuales y desordenados en sistemas que funcionan solos — desde pipelines de datos multi-país hasta servicios de sincronización desatendidos corriendo en producción.",
+          about_p2: "Vivo en Santiago de Chile, preparado para trabajo remoto en husos horarios de EE.UU. y Europa. Educado en Reino Unido (inglés C1), hablante nativo de español, pasaporte de la UE.",
+          fact_1: "6 años de experiencia profesional",
+          fact_2: "Backend en Python y C#/.NET",
+          fact_3: "Inglés C1 (educado en UK) · Español nativo",
+          fact_4: "Pasaporte UE — sin necesidad de visa en la UE",
+          h_projects: "Proyectos destacados",
+          projects_note: "El trabajo hecho para empleadores corre en producción y es propietario — se describe aquí sin enlaces al código.",
+          tag_prod: "Producción · Propietario", tag_lab: "Laboratorio personal", tag_oss: "Open source", tag_venture: "Emprendimiento",
+          prj1_t: "CLI de datos de encuestas multi-país",
+          prj1_d: "CLI en Python (Typer) que procesa datos de encuestas en 5 mercados LATAM — 43M+ registros. Integración SQL Server + API, descargas paralelas (ThreadPoolExecutor), caché en parquet, reportes Excel. Programada para ejecución desatendida.",
+          prj2_t: "Servicio de sincronización con SharePoint",
+          prj2_d: "Worker Service en .NET 8 que automatiza la sincronización de archivos/fotos entre directorios locales y SharePoint Online en 8 países LATAM — construido y mantenido de punta a punta, reemplazando procesos manuales.",
+          prj3_t: "Mejoras a pipeline OCR",
+          prj3_d: "Contribuí a un pipeline OCR en producción (TF-IDF + RapidFuzz, human-in-the-loop): identifiqué un cuello de botella de recall y propuse replantear la herramienta como asistencia al analista.",
+          prj4_t: "Laboratorio de experimentación en IA",
+          prj4_d: "Trabajo continuo con sistemas multi-agente, pipelines RAG, LLMs locales y bases vectoriales (ChromaDB). El asistente de esta página es un ejemplo pequeño, 100% del lado del cliente.",
+          prj5_t: "Guía de recuperación Evil Crow RF V2",
+          prj5_d: "Guía de recuperación para placas Evil Crow RF V2 brickeadas (ESP32-PICO-D4): recuperación del bootloader, combinaciones de firmware funcionales y diagrama de diagnóstico.",
+          prj6_t: "Enlig10 — emprendimiento de desarrollo web",
+          prj6_d: "Fundé un emprendimiento de desarrollo web, manejando el ciclo completo de proyectos directamente con clientes — levantamiento, construcción, entrega y soporte.",
+          h_experience: "Experiencia",
+          exp1_role: "Software Developer",
+          exp1_b1: "Diseñé y construí la CLI de datos de encuestas multi-país descrita arriba (5 mercados LATAM, 43M+ registros), colaborando en su programación para ejecución desatendida.",
+          exp1_b2: "Construí y mantuve de punta a punta el Worker Service .NET 8 de sincronización con SharePoint en 8 países LATAM, reemplazando procesos manuales.",
+          exp1_b3: "Contribuí mejoras a un pipeline OCR en producción, identificando un cuello de botella de recall y proponiendo replantear la herramienta como asistencia al analista.",
+          exp2_role: "Desarrollador Backend y Fundador",
+          exp2_date: "Experiencia anterior",
+          exp2_b1: "Construí servicios backend en Python y .NET para clientes enterprise en SII Group.",
+          exp2_b2: "Fundé Enlig10, un emprendimiento de desarrollo web — ciclo completo de proyectos trabajando directamente con clientes.",
+          h_skills: "Skills",
+          sg_backend: "Lenguajes y Backend", sg_data: "Datos", sg_cloud: "Cloud y DevOps", sg_ai: "IA (laboratorio personal)",
+          sk_pipelines: "pipelines de datos", sk_agents: "sistemas multi-agente", sk_llms: "LLMs locales",
+          h_education: "Educación y Certificaciones",
+          edu1_t: "Ingeniería en Informática",
+          edu2_d: "St. Peter's Catholic School — Guildford, UK (base del inglés C1)",
+          edu3_t: "Certificaciones",
+          h_assistant: "Pregúntale al Asistente",
+          assistant_note: "Un pequeño asistente estilo IA que responde preguntas sobre mi experiencia — 100% JavaScript del lado del cliente, sin backend ni llamadas externas. Solo conoce hechos verificados de esta página.",
+          chat_label: "Haz una pregunta",
+          chat_placeholder: "ej: ¿qué ha construido Mario?",
+          chat_send: "Enviar",
+          h_contact: "Contacto",
+          contact_p: "Abierto a roles backend senior — remoto, husos horarios de EE.UU. o Europa. La forma más rápida de contactarme es por email; suelo responder dentro del día.",
+          footer: "hecho con HTML/CSS/JS puro, sin frameworks.",
+          lang_btn_label: "Switch language to English",
+          theme_to_light: "Cambiar a tema claro", theme_to_dark: "Cambiar a tema oscuro"
+        }
+      };
 
-      function applyTheme(theme) {
-        root.setAttribute("data-theme", theme);
-        var dark = theme === "dark";
-        toggle.textContent = dark ? "🌙" : "☀️";
-        toggle.setAttribute("aria-label", dark ? "Switch to light theme" : "Switch to dark theme");
+      var lang = "en";
+      try { lang = localStorage.getItem("lang") || (navigator.language && navigator.language.slice(0,2) === "es" ? "es" : "en"); } catch (e) {}
+      if (lang !== "en" && lang !== "es") lang = "en";
+
+      var langToggle = document.getElementById("lang-toggle");
+
+      function applyLang(l) {
+        lang = l;
+        document.documentElement.setAttribute("lang", l);
+        var dict = I18N[l];
+        document.querySelectorAll("[data-i18n]").forEach(function (el) {
+          var key = el.getAttribute("data-i18n");
+          if (dict[key]) el.textContent = dict[key];
+        });
+        document.querySelectorAll("[data-i18n-placeholder]").forEach(function (el) {
+          var key = el.getAttribute("data-i18n-placeholder");
+          if (dict[key]) el.setAttribute("placeholder", dict[key]);
+        });
+        langToggle.textContent = l === "en" ? "ES" : "EN";
+        langToggle.setAttribute("aria-label", dict.lang_btn_label);
+        renderChips();
+        updateThemeLabel();
       }
-      toggle.addEventListener("click", function () {
-        var next = root.getAttribute("data-theme") === "dark" ? "light" : "dark";
-        applyTheme(next);
-        try { localStorage.setItem("theme", next); } catch (e) {}
+      langToggle.addEventListener("click", function () {
+        var next = lang === "en" ? "es" : "en";
+        applyLang(next);
+        try { localStorage.setItem("lang", next); } catch (e) {}
       });
 
-      /* ---------- Terminal typing effect ---------- */
+      /* ================= Theme ================= */
+      var root = document.documentElement;
+      var themeToggle = document.getElementById("theme-toggle");
+      var storedTheme = null;
+      try { storedTheme = localStorage.getItem("theme"); } catch (e) {}
+      if (storedTheme === "light" || storedTheme === "dark") root.setAttribute("data-theme", storedTheme);
+
+      function updateThemeLabel() {
+        var dark = root.getAttribute("data-theme") === "dark";
+        themeToggle.textContent = dark ? "🌙" : "☀️";
+        themeToggle.setAttribute("aria-label", dark ? I18N[lang].theme_to_light : I18N[lang].theme_to_dark);
+      }
+      themeToggle.addEventListener("click", function () {
+        var next = root.getAttribute("data-theme") === "dark" ? "light" : "dark";
+        root.setAttribute("data-theme", next);
+        try { localStorage.setItem("theme", next); } catch (e) {}
+        updateThemeLabel();
+      });
+
+      /* ================= Terminal typing ================= */
       var cmd = "python deploy_career.py --target remote --status available";
       var typed = document.getElementById("typed");
       var out = document.getElementById("term-out");
       var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
       if (reduced) {
         typed.textContent = cmd;
         out.hidden = false;
@@ -478,7 +737,118 @@
         })();
       }
 
-      /* ---------- Footer year ---------- */
+      /* ================= Assistant (client-side, rule-based) ================= */
+      var KB = {
+        en: {
+          greeting: "Hi! I'm a small client-side assistant. Ask me about Mario's experience, projects, skills, education or availability. I only answer with verified facts — for anything else, email him directly.",
+          fallback: "I don't have that answer — I only know verified facts about Mario's experience. Best next step: email mariotorreslagos@gmail.com, he usually replies within a day.",
+          chips: ["What has Mario built?", "Is he available for remote work?", "What's his tech stack?", "Education?", "How do I contact him?"],
+          entries: [
+            { k: ["built", "project", "portfolio", "work on", "done"], a: "Highlights: (1) a Python CLI (Typer) processing survey data for 5 LATAM markets — 43M+ records — with SQL Server + API integration, parallel downloads and parquet caching; (2) a .NET 8 Worker Service syncing files/photos to SharePoint Online across 8 LATAM countries, fully owned end-to-end; (3) improvements to a production OCR pipeline (TF-IDF + RapidFuzz). See the Projects section above for details." },
+            { k: ["remote", "available", "availability", "hire", "hiring", "relocat", "timezone", "time zone", "visa", "sponsor"], a: "Yes — Mario is available and set up for remote work across US and EU time zones, based in Santiago, Chile. He holds an EU passport, so no sponsorship is needed to work for EU companies." },
+            { k: ["stack", "skill", "technolog", "language", "python", "tools", ".net", "c#"], a: "Core stack: Python (FastAPI, Django, Flask, Typer), C#/.NET 8 and SQL. Data: PostgreSQL, SQL Server, MongoDB, BigQuery, pandas. Cloud/DevOps: GCP (Cloud Run, Cloud Functions, BigQuery), Docker, GitHub Actions, CI/CD, Linux. Personal AI lab: multi-agent systems, RAG, local LLMs, ChromaDB." },
+            { k: ["experience", "years", "senior", "background", "career", "kantar"], a: "6 years of professional experience. Most recently Software Developer at Kantar Worldpanel LATAM (Mar 2025 – May 2026) building data pipelines and automation. Earlier: backend services in Python and .NET for enterprise clients at SII Group, and founder of Enlig10, a web development venture." },
+            { k: ["education", "degree", "study", "studied", "cert", "english", "school", "university"], a: "B.Eng. in Computer Engineering (DUOC UC, Chile) and UK A-Levels (St. Peter's Catholic School, Guildford — basis for his C1 English). Certifications: Harvard CS50P, Google Cloud (BigQuery ML, Apigee, Compute Engine), IBM, Yonsei, Princeton." },
+            { k: ["contact", "email", "reach", "linkedin", "github", "cv", "resume"], a: "Email: mariotorreslagos@gmail.com (usually replies within a day). LinkedIn: linkedin.com/in/mario-torres-lagos · GitHub: github.com/wottan32. There's also a Download CV button at the top of the page." },
+            { k: ["ai", "llm", "rag", "agent", "chatbot", "machine learning", "ml"], a: "Mario runs a personal AI lab: multi-agent systems, RAG pipelines, local LLMs and ChromaDB. This assistant itself is a deliberately simple example — pure client-side JavaScript with a curated knowledge base, no backend and no external API calls." },
+            { k: ["ocr", "pipeline", "data"], a: "At Kantar he contributed to a production OCR pipeline (TF-IDF + RapidFuzz, human-in-the-loop): he identified a recall bottleneck and proposed reframing the tool as analyst assistance. He also built multi-country data pipelines processing 43M+ records." },
+            { k: ["spanish", "language", "idioma", "speak"], a: "English C1 (UK-educated) and native Spanish — this whole page is available in both, use the ES/EN button up top." },
+            { k: ["hello", "hi", "hey", "hola"], a: "Hello! Ask me about Mario's projects, stack, experience, education or availability — try one of the suggested questions below." },
+            { k: ["how", "made", "work", "you"], a: "I'm ~100 lines of plain JavaScript with a curated knowledge base — keyword matching, no LLM behind me, no data leaves this page. Mario's real AI lab work (RAG, local LLMs, multi-agent) is described in the Projects section." }
+          ]
+        },
+        es: {
+          greeting: "¡Hola! Soy un pequeño asistente que corre 100% en tu navegador. Pregúntame por la experiencia, proyectos, skills, educación o disponibilidad de Mario. Solo respondo con hechos verificados — para todo lo demás, escríbele directo.",
+          fallback: "No tengo esa respuesta — solo conozco hechos verificados sobre la experiencia de Mario. Lo mejor: escribe a mariotorreslagos@gmail.com, suele responder dentro del día.",
+          chips: ["¿Qué ha construido Mario?", "¿Está disponible para trabajo remoto?", "¿Cuál es su stack?", "¿Educación?", "¿Cómo lo contacto?"],
+          entries: [
+            { k: ["construido", "proyecto", "portafolio", "hecho", "trabajado"], a: "Destacados: (1) una CLI en Python (Typer) que procesa datos de encuestas de 5 mercados LATAM — 43M+ registros — con integración SQL Server + API, descargas paralelas y caché en parquet; (2) un Worker Service .NET 8 que sincroniza archivos/fotos con SharePoint Online en 8 países LATAM, mantenido de punta a punta; (3) mejoras a un pipeline OCR en producción (TF-IDF + RapidFuzz). Mira la sección Proyectos arriba." },
+            { k: ["remoto", "disponible", "disponibilidad", "contratar", "reubicar", "huso", "zona horaria", "visa", "patrocinio"], a: "Sí — Mario está disponible y preparado para trabajo remoto en husos horarios de EE.UU. y Europa, desde Santiago de Chile. Tiene pasaporte de la UE, así que no necesita visa para trabajar con empresas europeas." },
+            { k: ["stack", "skill", "tecnolog", "lenguaje", "python", "herramienta", ".net", "c#"], a: "Stack principal: Python (FastAPI, Django, Flask, Typer), C#/.NET 8 y SQL. Datos: PostgreSQL, SQL Server, MongoDB, BigQuery, pandas. Cloud/DevOps: GCP (Cloud Run, Cloud Functions, BigQuery), Docker, GitHub Actions, CI/CD, Linux. Laboratorio personal de IA: sistemas multi-agente, RAG, LLMs locales, ChromaDB." },
+            { k: ["experiencia", "años", "senior", "trayectoria", "carrera", "kantar"], a: "6 años de experiencia profesional. Lo más reciente: Software Developer en Kantar Worldpanel LATAM (mar 2025 – may 2026) construyendo pipelines de datos y automatización. Antes: servicios backend en Python y .NET para clientes enterprise en SII Group, y fundador de Enlig10, un emprendimiento de desarrollo web." },
+            { k: ["educación", "educacion", "título", "titulo", "estudi", "cert", "inglés", "ingles", "colegio", "universidad"], a: "Ingeniería en Informática (DUOC UC, Chile) y A-Levels británicos (St. Peter's Catholic School, Guildford — base de su inglés C1). Certificaciones: Harvard CS50P, Google Cloud (BigQuery ML, Apigee, Compute Engine), IBM, Yonsei, Princeton." },
+            { k: ["contacto", "contactar", "email", "correo", "linkedin", "github", "cv", "currícul", "curricul"], a: "Email: mariotorreslagos@gmail.com (suele responder dentro del día). LinkedIn: linkedin.com/in/mario-torres-lagos · GitHub: github.com/wottan32. También hay un botón de Descargar CV arriba." },
+            { k: ["ia", "llm", "rag", "agente", "chatbot", "machine learning", "ml"], a: "Mario mantiene un laboratorio personal de IA: sistemas multi-agente, pipelines RAG, LLMs locales y ChromaDB. Este asistente es un ejemplo deliberadamente simple — JavaScript puro del lado del cliente con una base de conocimiento curada, sin backend ni llamadas a APIs externas." },
+            { k: ["ocr", "pipeline", "datos"], a: "En Kantar contribuyó a un pipeline OCR en producción (TF-IDF + RapidFuzz, human-in-the-loop): identificó un cuello de botella de recall y propuso replantear la herramienta como asistencia al analista. También construyó pipelines de datos multi-país procesando 43M+ registros." },
+            { k: ["idioma", "español", "espanol", "inglés", "ingles", "habla"], a: "Inglés C1 (educado en Reino Unido) y español nativo — esta página completa está en ambos idiomas, usa el botón ES/EN de arriba." },
+            { k: ["hola", "buenas", "hey", "hello"], a: "¡Hola! Pregúntame por los proyectos, stack, experiencia, educación o disponibilidad de Mario — o prueba una de las preguntas sugeridas abajo." },
+            { k: ["cómo", "como", "funciona", "hecho", "tú", "tu"], a: "Soy ~100 líneas de JavaScript puro con una base de conocimiento curada — coincidencia de palabras clave, sin LLM detrás, ningún dato sale de esta página. El trabajo real de IA de Mario (RAG, LLMs locales, multi-agente) está descrito en la sección Proyectos." }
+          ]
+        }
+      };
+
+      var log = document.getElementById("chat-log");
+      var chipsBox = document.getElementById("chat-chips");
+      var form = document.getElementById("chat-form");
+      var input = document.getElementById("chat-input");
+      var greeted = false;
+      var greetEl = null;
+
+      function addMsg(who, text, isUser) {
+        var div = document.createElement("div");
+        div.className = "chat-msg" + (isUser ? " user" : "");
+        var whoSpan = document.createElement("span");
+        whoSpan.className = "who";
+        whoSpan.textContent = who + " ";
+        var txt = document.createElement("span");
+        txt.className = "txt";
+        txt.textContent = text;
+        div.appendChild(whoSpan);
+        div.appendChild(txt);
+        log.appendChild(div);
+        log.scrollTop = log.scrollHeight;
+        return div;
+      }
+
+      function answer(q) {
+        var norm = q.toLowerCase();
+        var kb = KB[lang];
+        var best = null, bestScore = 0;
+        kb.entries.forEach(function (e) {
+          var score = 0;
+          e.k.forEach(function (kw) { if (norm.indexOf(kw) !== -1) score += kw.length; });
+          if (score > bestScore) { bestScore = score; best = e; }
+        });
+        return best ? best.a : kb.fallback;
+      }
+
+      function renderChips() {
+        chipsBox.innerHTML = "";
+        KB[lang].chips.forEach(function (c) {
+          var b = document.createElement("button");
+          b.type = "button";
+          b.className = "chip";
+          b.textContent = c;
+          b.addEventListener("click", function () {
+            ask(c);
+          });
+          chipsBox.appendChild(b);
+        });
+        if (!greeted) {
+          greetEl = addMsg("assistant>", KB[lang].greeting, false);
+          greeted = true;
+        } else if (greetEl) {
+          greetEl.querySelector(".txt").textContent = KB[lang].greeting;
+        }
+      }
+
+      function ask(q) {
+        addMsg(lang === "en" ? "you>" : "tú>", q, true);
+        setTimeout(function () {
+          addMsg("assistant>", answer(q), false);
+        }, 220);
+      }
+
+      form.addEventListener("submit", function (ev) {
+        ev.preventDefault();
+        var q = input.value.trim();
+        if (!q) return;
+        input.value = "";
+        ask(q);
+      });
+
+      /* ================= Init ================= */
+      applyLang(lang);
       document.getElementById("year").textContent = new Date().getFullYear();
     })();
   </script>
