@@ -741,7 +741,7 @@
       var KB = {
         en: {
           greeting: "Hi! I'm a small client-side assistant. Ask me about Mario's experience, projects, skills, education or availability. I only answer with verified facts — for anything else, email him directly.",
-          fallback: "I don't have that answer — I only know verified facts about Mario's experience. Best next step: email mariotorreslagos@gmail.com, he usually replies within a day.",
+          fallback: "I can only answer with verified facts about Mario's experience, projects, skills, education and availability. For anything else, email him directly at mariotorreslagos@gmail.com — he usually replies within a day.",
           chips: ["What has Mario built?", "Is he available for remote work?", "What's his tech stack?", "Education?", "How do I contact him?"],
           entries: [
             { k: ["built", "project", "portfolio", "work on", "done"], a: "Highlights: (1) a Python CLI (Typer) processing survey data for 5 LATAM markets — 43M+ records — with SQL Server + API integration, parallel downloads and parquet caching; (2) a .NET 8 Worker Service syncing files/photos to SharePoint Online across 8 LATAM countries, fully owned end-to-end; (3) improvements to a production OCR pipeline (TF-IDF + RapidFuzz). See the Projects section above for details." },
@@ -753,13 +753,14 @@
             { k: ["ai", "llm", "rag", "agent", "chatbot", "machine learning", "ml"], a: "Mario runs a personal AI lab: multi-agent systems, RAG pipelines, local LLMs and ChromaDB. This assistant itself is a deliberately simple example — pure client-side JavaScript with a curated knowledge base, no backend and no external API calls." },
             { k: ["ocr", "pipeline", "data"], a: "At Kantar he contributed to a production OCR pipeline (TF-IDF + RapidFuzz, human-in-the-loop): he identified a recall bottleneck and proposed reframing the tool as analyst assistance. He also built multi-country data pipelines processing 43M+ records." },
             { k: ["spanish", "language", "idioma", "speak"], a: "English C1 (UK-educated) and native Spanish — this whole page is available in both, use the ES/EN button up top." },
+            { k: ["start", "monday", "notice", "when can", "how soon", "join"], a: "Mario is available now and open to remote roles in US/EU time zones. For a concrete start date and logistics, email him at mariotorreslagos@gmail.com — he usually replies within a day and can confirm directly." },
             { k: ["hello", "hi", "hey", "hola"], a: "Hello! Ask me about Mario's projects, stack, experience, education or availability — try one of the suggested questions below." },
             { k: ["how", "made", "work", "you"], a: "I'm ~100 lines of plain JavaScript with a curated knowledge base — keyword matching, no LLM behind me, no data leaves this page. Mario's real AI lab work (RAG, local LLMs, multi-agent) is described in the Projects section." }
           ]
         },
         es: {
           greeting: "¡Hola! Soy un pequeño asistente que corre 100% en tu navegador. Pregúntame por la experiencia, proyectos, skills, educación o disponibilidad de Mario. Solo respondo con hechos verificados — para todo lo demás, escríbele directo.",
-          fallback: "No tengo esa respuesta — solo conozco hechos verificados sobre la experiencia de Mario. Lo mejor: escribe a mariotorreslagos@gmail.com, suele responder dentro del día.",
+          fallback: "Solo puedo responder con hechos verificados sobre la experiencia, proyectos, skills, educación y disponibilidad de Mario. Para todo lo demás, escríbele directo a mariotorreslagos@gmail.com — suele responder dentro del día.",
           chips: ["¿Qué ha construido Mario?", "¿Está disponible para trabajo remoto?", "¿Cuál es su stack?", "¿Educación?", "¿Cómo lo contacto?"],
           entries: [
             { k: ["construido", "proyecto", "portafolio", "hecho", "trabajado"], a: "Destacados: (1) una CLI en Python (Typer) que procesa datos de encuestas de 5 mercados LATAM — 43M+ registros — con integración SQL Server + API, descargas paralelas y caché en parquet; (2) un Worker Service .NET 8 que sincroniza archivos/fotos con SharePoint Online en 8 países LATAM, mantenido de punta a punta; (3) mejoras a un pipeline OCR en producción (TF-IDF + RapidFuzz). Mira la sección Proyectos arriba." },
@@ -771,6 +772,7 @@
             { k: ["ia", "llm", "rag", "agente", "chatbot", "machine learning", "ml"], a: "Mario mantiene un laboratorio personal de IA: sistemas multi-agente, pipelines RAG, LLMs locales y ChromaDB. Este asistente es un ejemplo deliberadamente simple — JavaScript puro del lado del cliente con una base de conocimiento curada, sin backend ni llamadas a APIs externas." },
             { k: ["ocr", "pipeline", "datos"], a: "En Kantar contribuyó a un pipeline OCR en producción (TF-IDF + RapidFuzz, human-in-the-loop): identificó un cuello de botella de recall y propuso replantear la herramienta como asistencia al analista. También construyó pipelines de datos multi-país procesando 43M+ registros." },
             { k: ["idioma", "español", "espanol", "inglés", "ingles", "habla"], a: "Inglés C1 (educado en Reino Unido) y español nativo — esta página completa está en ambos idiomas, usa el botón ES/EN de arriba." },
+            { k: ["empezar", "comenzar", "lunes", "cuándo puede", "cuando puede", "incorpor", "aviso"], a: "Mario está disponible ahora, abierto a roles remotos en husos de EE.UU. y Europa. Para una fecha de inicio concreta y logística, escríbele a mariotorreslagos@gmail.com — suele responder dentro del día y te lo confirma directo." },
             { k: ["hola", "buenas", "hey", "hello"], a: "¡Hola! Pregúntame por los proyectos, stack, experiencia, educación o disponibilidad de Mario — o prueba una de las preguntas sugeridas abajo." },
             { k: ["cómo", "como", "funciona", "hecho", "tú", "tu"], a: "Soy ~100 líneas de JavaScript puro con una base de conocimiento curada — coincidencia de palabras clave, sin LLM detrás, ningún dato sale de esta página. El trabajo real de IA de Mario (RAG, LLMs locales, multi-agente) está descrito en la sección Proyectos." }
           ]
@@ -800,9 +802,26 @@
         return div;
       }
 
+      /* Out-of-scope guard: runs BEFORE keyword matching. Departure reasons,
+         salary, personal data, references etc. always get the single fallback
+         redirect — never the career summary. */
+      var GUARD = [
+        /\b(leaves?|left|quit|fired|resign\w*|laid ?off|lay ?off|let go)\b/,
+        /\b(salary|salaries|compensation|pay|rates?|expectations?)\b/,
+        /\b(single|married|girlfriend|boyfriend|kids?|children|family|religion|politics?|age|old|birthday)\b/,
+        /\b(references?|why did he (leave|go))\b/,
+        /\b(renunci\w*|despid\w*|se fue|dej[oó]|echaron)\b/,
+        /\b(sueldo|salario|pretensi[oó]n\w*|expectativas?)\b/,
+        /\b(soltero|casado|novi[oa]|hijos?|familia|religi[oó]n|pol[ií]tica|edad|cu[aá]ntos a[nñ]os)\b/,
+        /\b(referencias?)\b/
+      ];
+
       function answer(q) {
         var norm = q.toLowerCase();
         var kb = KB[lang];
+        for (var g = 0; g < GUARD.length; g++) {
+          if (GUARD[g].test(norm)) return kb.fallback;
+        }
         var best = null, bestScore = 0;
         kb.entries.forEach(function (e) {
           var score = 0;
