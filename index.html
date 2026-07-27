@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mario Torres — Senior Python Backend Developer</title>
+  <meta name="description" content="Senior Python backend engineer (6 years) focused on automation, data pipelines and reliable backend services. Santiago, Chile — remote-ready for US/EU time zones. EU passport holder.">
+  <meta name="author" content="Mario Torres Lagos">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Mario Torres — Senior Python Backend Developer">
+  <meta property="og:description" content="Senior Python backend engineer focused on automation, data pipelines and reliable backend services. Remote-ready (US/EU time zones), EU passport holder.">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="en_US">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Mario Torres — Senior Python Backend Developer">
+  <meta name="twitter:description" content="Senior Python backend engineer focused on automation, data pipelines and reliable backend services.">
+
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%E2%8C%A8%EF%B8%8F%3C/text%3E%3C/svg%3E">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    /* ---------- Tokens ---------- */
+    :root {
+      --font-sans: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+      --font-mono: "JetBrains Mono", ui-monospace, "Cascadia Code", Consolas, monospace;
+      --max-w: 46rem;
+    }
+    [data-theme="dark"] {
+      --bg: #0d1117;
+      --bg-alt: #161b22;
+      --border: #2d333b;
+      --text: #e6edf3;
+      --text-dim: #9ba7b4;
+      --accent: #4cc38a;
+      --accent-contrast: #0d1117;
+      --link: #6cb6ff;
+      --terminal-bg: #010409;
+      --badge-bg: #1c2430;
+      color-scheme: dark;
+    }
+    [data-theme="light"] {
+      --bg: #ffffff;
+      --bg-alt: #f6f8fa;
+      --border: #d0d7de;
+      --text: #1f2328;
+      --text-dim: #57606a;
+      --accent: #116644;
+      --accent-contrast: #ffffff;
+      --link: #0b5cad;
+      --terminal-bg: #0d1117;
+      --badge-bg: #eef1f4;
+      color-scheme: light;
+    }
+
+    /* ---------- Base ---------- */
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--font-sans);
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.65;
+      font-size: 1rem;
+      -webkit-font-smoothing: antialiased;
+      transition: background .2s ease, color .2s ease;
+    }
+    a { color: var(--link); text-decoration: none; }
+    a:hover, a:focus-visible { text-decoration: underline; }
+    :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 2px; }
+    code, .mono { font-family: var(--font-mono); }
+
+    .skip-link {
+      position: absolute; left: -9999px; top: 0;
+      background: var(--accent); color: var(--accent-contrast);
+      padding: .5rem 1rem; z-index: 100; border-radius: 0 0 6px 0;
+    }
+    .skip-link:focus { left: 0; }
+
+    .wrap { max-width: var(--max-w); margin: 0 auto; padding: 0 1.25rem; }
+
+    /* ---------- Header / nav ---------- */
+    header.site {
+      position: sticky; top: 0; z-index: 50;
+      background: color-mix(in srgb, var(--bg) 88%, transparent);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav {
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 1rem; padding: .7rem 1.25rem;
+      max-width: var(--max-w); margin: 0 auto;
+    }
+    .nav-brand { font-family: var(--font-mono); font-weight: 600; font-size: .95rem; color: var(--text); }
+    .nav-brand span { color: var(--accent); }
+    .nav-links { display: none; gap: 1.1rem; list-style: none; }
+    .nav-links a { color: var(--text-dim); font-size: .9rem; }
+    .nav-links a:hover { color: var(--text); }
+    @media (min-width: 640px) { .nav-links { display: flex; } }
+
+    #theme-toggle {
+      background: none; border: 1px solid var(--border); color: var(--text);
+      border-radius: 6px; padding: .35rem .55rem; cursor: pointer;
+      font-size: 1rem; line-height: 1;
+    }
+    #theme-toggle:hover { border-color: var(--accent); }
+
+    /* ---------- Hero ---------- */
+    .hero { padding: 4.5rem 0 3.5rem; }
+    .hero h1 { font-size: clamp(1.9rem, 6vw, 2.8rem); font-weight: 700; letter-spacing: -0.02em; }
+    .hero .role {
+      font-family: var(--font-mono); color: var(--accent);
+      font-size: clamp(1rem, 3.5vw, 1.2rem); margin-top: .4rem; font-weight: 500;
+    }
+    .hero .meta { color: var(--text-dim); margin-top: .8rem; font-size: .95rem; }
+    .hero .meta .sep { margin: 0 .4rem; color: var(--border); }
+
+    .terminal {
+      margin-top: 2rem; border: 1px solid var(--border); border-radius: 8px;
+      background: var(--terminal-bg); overflow: hidden;
+      font-family: var(--font-mono); font-size: .85rem;
+    }
+    .terminal-bar {
+      display: flex; align-items: center; gap: .4rem;
+      padding: .5rem .8rem; border-bottom: 1px solid var(--border);
+      background: color-mix(in srgb, var(--terminal-bg) 70%, #30363d);
+    }
+    .terminal-bar i { width: .7rem; height: .7rem; border-radius: 50%; display: inline-block; opacity: .85; }
+    .terminal-bar i:nth-child(1) { background: #ff5f57; }
+    .terminal-bar i:nth-child(2) { background: #febc2e; }
+    .terminal-bar i:nth-child(3) { background: #28c840; }
+    .terminal-bar span { margin-left: .5rem; color: #8b949e; font-size: .75rem; }
+    .terminal-body { padding: 1rem .9rem 1.1rem; color: #e6edf3; min-height: 5.2rem; }
+    .terminal-body .prompt { color: #4cc38a; }
+    .terminal-body .out { color: #8b949e; display: block; margin-top: .35rem; }
+    .terminal-body .out strong { color: #4cc38a; font-weight: 500; }
+    .cursor {
+      display: inline-block; width: .55em; height: 1.1em;
+      background: #e6edf3; vertical-align: text-bottom;
+      animation: blink 1.06s step-end infinite;
+    }
+    @keyframes blink { 50% { opacity: 0; } }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .cursor { animation: none; }
+    }
+
+    .cta-row { display: flex; flex-wrap: wrap; gap: .75rem; margin-top: 2rem; }
+    .btn {
+      display: inline-flex; align-items: center; gap: .5rem;
+      font-family: var(--font-mono); font-size: .88rem; font-weight: 500;
+      padding: .6rem 1.1rem; border-radius: 6px; border: 1px solid var(--border);
+      color: var(--text); background: var(--bg-alt); cursor: pointer;
+    }
+    .btn:hover { border-color: var(--accent); text-decoration: none; }
+    .btn-primary { background: var(--accent); color: var(--accent-contrast); border-color: var(--accent); }
+    .btn-primary:hover { filter: brightness(1.1); }
+
+    /* ---------- Sections ---------- */
+    section { padding: 3rem 0; border-top: 1px solid var(--border); }
+    h2 {
+      font-family: var(--font-mono); font-size: 1.15rem; font-weight: 600;
+      margin-bottom: 1.5rem; letter-spacing: -0.01em;
+    }
+    h2::before { content: "## "; color: var(--accent); }
+
+    .about p + p { margin-top: .9rem; }
+    .about .facts {
+      margin-top: 1.4rem; display: grid; gap: .5rem;
+      grid-template-columns: 1fr; list-style: none;
+      font-size: .92rem; color: var(--text-dim);
+    }
+    @media (min-width: 560px) { .about .facts { grid-template-columns: 1fr 1fr; } }
+    .about .facts li::before { content: "▸ "; color: var(--accent); font-family: var(--font-mono); }
+
+    /* ---------- Timeline ---------- */
+    .timeline { list-style: none; position: relative; padding-left: 1.4rem; }
+    .timeline::before {
+      content: ""; position: absolute; left: .28rem; top: .4rem; bottom: .4rem;
+      width: 2px; background: var(--border);
+    }
+    .timeline li { position: relative; padding-bottom: 2rem; }
+    .timeline li:last-child { padding-bottom: 0; }
+    .timeline li::before {
+      content: ""; position: absolute; left: -1.4rem; top: .42rem;
+      width: .62rem; height: .62rem; border-radius: 50%;
+      background: var(--accent); border: 2px solid var(--bg);
+    }
+    .tl-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: .3rem .6rem; }
+    .tl-head h3 { font-size: 1.02rem; font-weight: 600; }
+    .tl-org { color: var(--text-dim); font-size: .95rem; }
+    .tl-date { font-family: var(--font-mono); font-size: .78rem; color: var(--text-dim); margin-top: .15rem; }
+    .timeline ul { list-style: none; margin-top: .6rem; }
+    .timeline ul li { padding: 0 0 .45rem 1rem; }
+    .timeline ul li::before {
+      content: "–"; position: absolute; left: 0; top: 0;
+      width: auto; height: auto; border: 0; border-radius: 0;
+      background: none; color: var(--accent); font-family: var(--font-mono);
+    }
+    .timeline ul li { position: relative; font-size: .95rem; color: var(--text); }
+    .tech { font-family: var(--font-mono); font-size: .86em; color: var(--accent); }
+
+    /* ---------- Skills ---------- */
+    .skill-group { margin-bottom: 1.4rem; }
+    .skill-group:last-child { margin-bottom: 0; }
+    .skill-group h3 {
+      font-size: .85rem; font-weight: 600; text-transform: uppercase;
+      letter-spacing: .06em; color: var(--text-dim); margin-bottom: .6rem;
+    }
+    .badges { display: flex; flex-wrap: wrap; gap: .45rem; list-style: none; }
+    .badges li {
+      font-family: var(--font-mono); font-size: .8rem;
+      background: var(--badge-bg); border: 1px solid var(--border);
+      padding: .28rem .6rem; border-radius: 5px; color: var(--text);
+    }
+
+    /* ---------- Education ---------- */
+    .edu-list { list-style: none; display: grid; gap: 1.1rem; }
+    .edu-list h3 { font-size: .98rem; font-weight: 600; }
+    .edu-list p { color: var(--text-dim); font-size: .92rem; }
+
+    /* ---------- Contact ---------- */
+    .contact p { max-width: 38rem; }
+    .contact .cta-row { margin-top: 1.5rem; }
+
+    footer.site {
+      border-top: 1px solid var(--border);
+      padding: 1.6rem 1.25rem 2.2rem; text-align: center;
+      color: var(--text-dim); font-size: .82rem; font-family: var(--font-mono);
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site">
+    <nav class="nav" aria-label="Main navigation">
+      <a class="nav-brand" href="#top" aria-label="Home">mario<span>@</span>torres<span>:~$</span></a>
+      <ul class="nav-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#experience">Experience</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#education">Education</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      <button id="theme-toggle" aria-label="Switch to light theme" title="Toggle color theme">🌙</button>
+    </nav>
+  </header>
+
+  <main id="main">
+    <!-- ================= HERO ================= -->
+    <section class="hero wrap" id="top" style="border-top:0">
+      <h1>Mario Torres Lagos</h1>
+      <p class="role">Senior Backend Developer · Python</p>
+      <p class="meta">
+        Santiago, Chile <span class="sep">·</span>
+        Remote-ready (US/EU time zones) <span class="sep">·</span>
+        EU passport holder
+      </p>
+
+      <div class="terminal" aria-hidden="true">
+        <div class="terminal-bar"><i></i><i></i><i></i><span>bash — mario@torres</span></div>
+        <div class="terminal-body">
+          <span class="prompt">$&nbsp;</span><span id="typed"></span><span class="cursor" id="cursor"></span>
+          <span class="out" id="term-out" hidden>
+            <strong>✓</strong> 6 years of backend experience loaded<br>
+            <strong>✓</strong> status: <strong>available</strong> — open to remote roles
+          </span>
+        </div>
+      </div>
+
+      <div class="cta-row">
+        <a class="btn btn-primary" href="mailto:mariotorreslagos@gmail.com">✉ Get in touch</a>
+        <a class="btn" href="./cv/CV_Mario_Torres_Backend_EN_MASTER_v2.pdf" download>⬇ Download CV (PDF)</a>
+        <a class="btn" href="https://linkedin.com/in/mario-torres-lagos" target="_blank" rel="noopener noreferrer">in/ LinkedIn</a>
+      </div>
+    </section>
+
+    <!-- ================= ABOUT ================= -->
+    <section id="about" class="about wrap">
+      <h2>About</h2>
+      <p>
+        Senior Python backend engineer focused on automation, data pipelines and reliable
+        backend services. I turn messy, manual processes into systems that run by themselves —
+        from multi-country data pipelines to unattended file-sync services running in production.
+      </p>
+      <p>
+        Based in Santiago, Chile, and set up for remote work across US and European time zones.
+        Educated in the UK (English C1), native Spanish speaker, EU passport holder.
+      </p>
+      <ul class="facts">
+        <li>6 years of professional experience</li>
+        <li>Python &amp; C#/.NET backend</li>
+        <li>English C1 (UK-educated) · Spanish native</li>
+        <li>EU passport — no sponsorship needed in the EU</li>
+      </ul>
+    </section>
+
+    <!-- ================= EXPERIENCE ================= -->
+    <section id="experience" class="wrap">
+      <h2>Experience</h2>
+      <ol class="timeline">
+        <li>
+          <div class="tl-head">
+            <h3>Software Developer</h3>
+            <span class="tl-org">— Kantar Worldpanel LATAM</span>
+          </div>
+          <p class="tl-date">Mar 2025 – May 2026</p>
+          <ul>
+            <li>
+              Designed and built a Python CLI (<span class="tech">Typer</span>) for multi-country
+              survey data processing across 5 LATAM markets (43M+ records):
+              <span class="tech">SQL Server</span> + API integration, parallel downloads via
+              <span class="tech">ThreadPoolExecutor</span>, <span class="tech">parquet</span> caching
+              and Excel reporting. Collaborated on its scheduling for unattended execution.
+            </li>
+            <li>
+              Built and fully owned end-to-end a <span class="tech">.NET 8</span> Worker Service
+              automating file/photo sync between local directories and SharePoint Online
+              (<span class="tech">Microsoft Graph API</span>, <span class="tech">Docker</span>)
+              across 8 LATAM countries, replacing manual processes.
+            </li>
+            <li>
+              Contributed to improvements of a production OCR pipeline
+              (<span class="tech">TF-IDF</span> + <span class="tech">RapidFuzz</span>,
+              human-in-the-loop), identifying a recall bottleneck and proposing reframing
+              the tool as analyst assistance.
+            </li>
+          </ul>
+        </li>
+        <li>
+          <div class="tl-head">
+            <h3>Backend Developer &amp; Founder</h3>
+            <span class="tl-org">— SII Group · Enlig10 (earlier roles)</span>
+          </div>
+          <p class="tl-date">Earlier experience</p>
+          <ul>
+            <li>
+              Built backend services in <span class="tech">Python</span> and
+              <span class="tech">.NET</span> for enterprise clients at SII Group.
+            </li>
+            <li>
+              Founded Enlig10, a web development venture — full project lifecycle
+              working directly with clients.
+            </li>
+          </ul>
+        </li>
+      </ol>
+    </section>
+
+    <!-- ================= SKILLS ================= -->
+    <section id="skills" class="wrap">
+      <h2>Skills</h2>
+
+      <div class="skill-group">
+        <h3>Languages &amp; Backend</h3>
+        <ul class="badges">
+          <li>Python</li><li>FastAPI</li><li>Django</li><li>Flask</li><li>Typer</li>
+          <li>C# / .NET 8</li><li>SQL</li>
+        </ul>
+      </div>
+
+      <div class="skill-group">
+        <h3>Data</h3>
+        <ul class="badges">
+          <li>PostgreSQL</li><li>SQL Server</li><li>MongoDB</li><li>BigQuery</li>
+          <li>pandas</li><li>data pipelines</li>
+        </ul>
+      </div>
+
+      <div class="skill-group">
+        <h3>Cloud &amp; DevOps</h3>
+        <ul class="badges">
+          <li>GCP (Cloud Run, Cloud Functions, BigQuery)</li><li>Docker</li>
+          <li>GitHub Actions</li><li>CI/CD</li><li>Linux</li>
+        </ul>
+      </div>
+
+      <div class="skill-group">
+        <h3>AI (personal lab)</h3>
+        <ul class="badges">
+          <li>multi-agent systems</li><li>RAG</li><li>local LLMs</li>
+          <li>ChromaDB</li><li>prompt engineering</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ================= EDUCATION ================= -->
+    <section id="education" class="wrap">
+      <h2>Education &amp; Certifications</h2>
+      <ul class="edu-list">
+        <li>
+          <h3>B.Eng. Computer Engineering</h3>
+          <p>DUOC UC — Chile</p>
+        </li>
+        <li>
+          <h3>UK A-Levels</h3>
+          <p>St. Peter's Catholic School — Guildford, UK (basis for C1 English)</p>
+        </li>
+        <li>
+          <h3>Certifications</h3>
+          <p>
+            Harvard CS50P · Google Cloud (BigQuery ML, Apigee, Compute Engine) ·
+            IBM · Yonsei · Princeton
+          </p>
+        </li>
+      </ul>
+    </section>
+
+    <!-- ================= CONTACT ================= -->
+    <section id="contact" class="contact wrap">
+      <h2>Contact</h2>
+      <p>
+        Open to senior backend roles — remote, US or EU time zones.
+        The fastest way to reach me is email; I usually reply within a day.
+      </p>
+      <div class="cta-row">
+        <a class="btn btn-primary" href="mailto:mariotorreslagos@gmail.com">mariotorreslagos@gmail.com</a>
+        <a class="btn" href="https://linkedin.com/in/mario-torres-lagos" target="_blank" rel="noopener noreferrer">linkedin.com/in/mario-torres-lagos</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site">
+    <p>© <span id="year">2026</span> Mario Torres Lagos — built with plain HTML/CSS/JS, no frameworks.</p>
+  </footer>
+
+  <!--
+    Optional photo placeholder — uncomment and drop an image at ./img/mario.jpg
+    <img src="./img/mario.jpg" alt="Portrait of Mario Torres Lagos" width="120" height="120">
+  -->
+
+  <script>
+    (function () {
+      "use strict";
+
+      /* ---------- Theme toggle ---------- */
+      var root = document.documentElement;
+      var toggle = document.getElementById("theme-toggle");
+      var stored = null;
+      try { stored = localStorage.getItem("theme"); } catch (e) {}
+      if (stored === "light" || stored === "dark") applyTheme(stored);
+
+      function applyTheme(theme) {
+        root.setAttribute("data-theme", theme);
+        var dark = theme === "dark";
+        toggle.textContent = dark ? "🌙" : "☀️";
+        toggle.setAttribute("aria-label", dark ? "Switch to light theme" : "Switch to dark theme");
+      }
+      toggle.addEventListener("click", function () {
+        var next = root.getAttribute("data-theme") === "dark" ? "light" : "dark";
+        applyTheme(next);
+        try { localStorage.setItem("theme", next); } catch (e) {}
+      });
+
+      /* ---------- Terminal typing effect ---------- */
+      var cmd = "python deploy_career.py --target remote --status available";
+      var typed = document.getElementById("typed");
+      var out = document.getElementById("term-out");
+      var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+      if (reduced) {
+        typed.textContent = cmd;
+        out.hidden = false;
+      } else {
+        var i = 0;
+        (function tick() {
+          if (i <= cmd.length) {
+            typed.textContent = cmd.slice(0, i);
+            i++;
+            setTimeout(tick, 34 + Math.random() * 46);
+          } else {
+            setTimeout(function () { out.hidden = false; }, 350);
+          }
+        })();
+      }
+
+      /* ---------- Footer year ---------- */
+      document.getElementById("year").textContent = new Date().getFullYear();
+    })();
+  </script>
+</body>
+</html>
